@@ -526,5 +526,10 @@ public function patient_history() {
   }
 
 
+
+ public function medicine_repeat() {
+   
+ }
+
 } // end class
 
