@@ -78,8 +78,11 @@
        
         $this->db->from($this->table);
           
-        $this->db->where_not_in('patient_id',$pat);
- 
+        if(!empty($pat)) {
+
+           $this->db->where_not_in('patient_id',$pat);
+        }
+        
         $i = 0;
         // loop searchable columns 
         foreach($this->column_search as $item){
