@@ -28,22 +28,25 @@
     public function countAll(){
     //    $this->db->from($this->table);
     
-    $q = $this->db->query("select patient_id from appointment where app_status = 0");
-    $query = $q->result();
+        $q = $this->db->query("select patient_id from appointment where app_status = 0");
+        $query = $q->result();
 
-    $pat = array();
+        $pat = array();
 
-      foreach($query as $qr):
-          
-        $pat[] = $qr->patient_id;
+          foreach($query as $qr):
+              
+            $pat[] = $qr->patient_id;
 
-      endforeach;
-   
-    $this->db->from($this->table);
+          endforeach;
       
-    $this->db->where_not_in('patient_id',$pat);
-    
-       return $this->db->count_all_results();
+        $this->db->from($this->table);
+        
+        if(!empty($pat)) {
+        
+          $this->db->where_not_in('patient_id',$pat);
+        }
+
+        return $this->db->count_all_results();
     }
     
     /*
