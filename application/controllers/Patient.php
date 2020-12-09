@@ -45,7 +45,7 @@ class Patient extends MY_Controller {
              if($this->session->userdata("group_id") == 1 || $this->session->userdata("group_id") == 2 ) {
                 $hist = '<a href="'.base_url().'patient/patient_history/'.$member->patient_id.'"  class="btn btn-link btn-primary btn-just-icon"><i class="fa fa-history"></i></a>';
                } else {
-                 $hist = "";
+                $hist = '<a onClick="repeat_medicine('.$member->patient_id.')"  class="btn btn-link btn-primary btn-just-icon"><i class="fa fa-history"></i></a>';
                }
           
             $i++;
@@ -527,9 +527,21 @@ public function patient_history() {
 
 
 
- public function medicine_repeat() {
-   
- }
+ public function repeat_medicine() {
+   extract($_POST);
+  
+    $data = array(
+                   "patient_id"      => $p_id,
+                   "date"            => date("Y-m-d"),
+                   "time"            => date("H:i"),
+                   "CREATED_DATE"    => date("Y-m-d H:i:s"),
+                   "CREATED_USERID"  => $this->session->userdata('user_id')
+           
+                  );
+
+    $this->general->create_record($data, "repeat_medicine");  
+
+  }
 
 } // end class
 

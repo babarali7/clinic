@@ -306,6 +306,52 @@
 
     }
 
+
+    function repeat_medicine(id) {
+
+        Swal.fire({
+          title: 'Is this a Repeat Order ?',
+          text: "You want to check for medicine ?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Yes!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+          // $("#for").submit();
+   
+                         $.ajax({
+                                url: '<?=base_url();?>patient/repeat_medicine',
+                                type: "post",
+                                dataType:"json",
+                                data: { p_id:id },
+                                success: function(data) 
+                                {
+
+                                  // Swal.fire(
+                                  //           'Deleted!',
+                                  //           'Appointment has been deleted.',
+                                  //           'success'
+                                  //         )   
+                                  
+                                        
+                                }
+                              
+                        });
+                  
+                  window.location.href = "<?=base_url();?>patient/patient_history/"+id;
+
+
+          }
+
+        });
+         
+     
+     }
+
+
+
     </script>
 
 <script>
